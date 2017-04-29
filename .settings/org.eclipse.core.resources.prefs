@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//app/Http/Controllers/StudentController.php=UTF-8
+encoding//app/Http/Controllers/SubjectController.php=UTF-8
+encoding//app/Repositories/Subject/SubjectRepository.php=UTF-8
+encoding//resources/views/admins/master.blade.php=UTF-8
+encoding//resources/views/admins/student/edit.blade.php=UTF-8
+encoding//resources/views/admins/student/index.blade.php=UTF-8
+encoding//resources/views/admins/subject/edit.blade.php=UTF-8
+encoding//resources/views/admins/subject/index.blade.php=UTF-8
+encoding/<project>=UTF-8
