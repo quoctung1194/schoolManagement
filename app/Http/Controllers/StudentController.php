@@ -39,6 +39,10 @@ class StudentController extends Controller
 		}
 		
 		$param['student'] = $student;
+		
+		$studentClassks = $classRepository->getClasskByStudent($student->id);
+		$param['studentClassks'] = $studentClassks;
+		
 		//Load tất cả các khoa
 		$specilities = $specialityRepository->getAll();
 		$param['specilities'] = $specilities;
@@ -50,7 +54,7 @@ class StudentController extends Controller
 			//Lấy ra khoa của lớp của học sinh hiện hành
 			$specility = $student->classk->speciality;
 			//Lấy ra tất cả các lớp thuộc khoa này
-			$param['classks'] = $classRepository->getClasskBySpecialiy($specility->id);
+			$param['classks'] = $classRepository->getAll();
 		}
 		
 		return $this->view('edit', $param);

@@ -39,11 +39,15 @@
 				<tbody>
 					<?php $stt = 0;?>
 					@foreach($students as $student)
-					<tr>
+					<tr style="vertical-align: middle;">
 						<td>{{ ++$stt }}</td>
-						<td>{{ $student->first_name }}</td>
 						<td>{{ $student->last_name }}</td>
-						<td><a style="cursor:pointer" onclick="loadRequiredSubjects('{{ $student->classk->speciality->id }}')">{{ $student->classk->speciality->name }}</a></td>
+						<td>{{ $student->first_name }}</td>
+						<td>
+							@foreach ($student->studentClassks as $studentClass)
+								<a style="cursor:pointer" onclick="loadRequiredSubjects('{{ $studentClass->classk->speciality->id  }}')">{{ $studentClass->classk->speciality->name }}</a><br>
+							@endforeach
+						</td>
 						<td>{{ $student->id_number }}</td>
 						<td>
 							<a href="{{ route('AS-002', ['id' => $student->id]) }}">

@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Student extends Model
+class StudentClassk extends Model
 {
 	use SoftDeletes;
 	
@@ -17,12 +17,8 @@ class Student extends Model
 		return $this->belongsTo('App\Classk');
 	}
 	
-	public function marks()
+	public function student()
 	{
-		return $this->hasMany('App\StudentMark');
-	}
-	
-	public function studentClassks() {
-		return $this->hasMany('App\StudentClassk');
+		return $this->belongsTo('App\Student');
 	}
 }

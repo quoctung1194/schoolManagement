@@ -3,6 +3,7 @@ namespace Repository\Student;
 
 use App\Student;
 use Illuminate\Support\Facades\DB;
+use App\StudentClassk;
 
 class StudentRepository implements IStudentRepository
 {
@@ -28,11 +29,14 @@ class StudentRepository implements IStudentRepository
 			$student->id_number = $params['id_number'];
 			$student->last_name = $params['last_name'];
 			$student->first_name = $params['first_name'];
-			$student->classk_id = $params['classk_id'];
+			$student->classk_id = $params['classk_id'][0];
 			
 			$student->save();
 			
+			$this->saveStudentClassk($student->id, $params['classk_id']);
+			
 			DB::commit();
+			
 			return $student;
 			
 		} catch (\Exception $ex) {
@@ -41,6 +45,17 @@ class StudentRepository implements IStudentRepository
 			return null;
 		}
 		
+	}
+	
+	public function saveStudentClassk($studentId, $classkIds) {
+		$query = StudentClassk::where('student_id', $studentId)->delete();
+		
+		foreach($classkIds as $id) {
+			$item = new StudentClassk();
+			$item->student_id = $studentId;
+			$item->classk_id = $id;
+			$item->save();
+		}
 	}
 	
 	public function remove($id) {

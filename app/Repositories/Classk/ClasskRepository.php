@@ -3,11 +3,17 @@ namespace Repository\Classk;
 
 use App\Classk;
 use Illuminate\Support\Facades\DB;
+use App\Student;
+use App\StudentClassk;
 
 class ClasskRepository implements IClasskRepository
 {
 	public function getClasskBySpecialiy($specialityId) {
 		return Classk::where('speciality_id', '=', $specialityId)->get();
+	}
+	
+	public function getClasskByStudent($studentId) {
+		return StudentClassk::where('student_id', '=', $studentId)->get();
 	}
 	
 	public function getAll()
