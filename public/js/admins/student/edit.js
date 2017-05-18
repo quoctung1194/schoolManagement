@@ -45,9 +45,9 @@ function submitForm() {
 	});
 }
 
-function loadCombobox() {
+function loadCombobox(idx) {
 	$.ajax({
-		url: $("#CS-001").val() + "/" + $('#specialityId').val(),
+		url: $("#CS-001").val() + "/" + $('#specialityId' + idx).val(),
 		type: 'GET',
 		contentType: false,
 		cache: false,
@@ -57,10 +57,10 @@ function loadCombobox() {
 			list = data.list;
 			
 			//Remove tất cả các option nếu có
-			$('#classkId').find('option').remove();
+			$('#classkId'+idx).find('option').remove();
 			//Add lai các option nhận từ server
 			$.each(list, function (i, item){
-				$('#classkId').append($('<option>', {
+				$('#classkId'+idx).append($('<option>', {
 					value: list[i].id,
 					text: list[i].name
 				}));

@@ -1,7 +1,31 @@
 @extends('admins.master')
 
 @section('javascript')
-<script src="{{ URL::asset('js/admins/student/edit.js?v=2') }}"></script>
+<script src="{{ URL::asset('js/admins/student/edit.js?v=4') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#addMore").click(function () {
+			var ar = new Array();
+			$('tr[id^="choice"]').each(
+	            function() {
+	                ar.push(
+	                    parseInt( $(this).attr('id').replace('choice','') )
+	                );
+            });
+			var maxIdx = Math.max.apply( Math, ar );
+			var tr = $('#choice' + maxIdx);
+			var index = maxIdx + 1;
+			
+		    var clone = tr.clone().attr('id', 'choice' + index).insertAfter(tr);
+		    clone.children().eq(0).find('select').attr('id', 'specialityId' + index);
+		    clone.children().eq(0).find('select').attr('onChange', 'loadCombobox(' + index + ')');
+		    clone.children().eq(0).find('select').attr('name', 'speciality_id[' + index + ']');
+		    clone.children().eq(1).find('select').attr('id', 'classkId' + index);
+		    clone.children().eq(1).find('select').attr('name', 'classk_id[' + index + ']');
+		    
+		});
+	});
+</script>
 @endsection
 
 @section('content')
@@ -55,47 +79,106 @@
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<label>Khoa</label>
-							</td>
-							<td>
-								<select id="specialityId" onChange="loadCombobox()" name="speciality_id" class="form-control">
-									@foreach($specilities as $specility)
-									<option value='{{ $specility->id }}'
-									<?php
-									if($student->id != null and $student->classk->speciality->id == $specility->id)
-									{
-										echo 'selected';
-									}
-									?>
-									>
-										{{ $specility->name }}
-									</option>
-									@endforeach
-								</select>
+							<td colspan="2">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th width="50%">
+												<label>Khoa</label>
+											</th>
+											<th>
+												<label>Lớp</label>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+									@if ($student->id == null)
+										<tr id="choice0">
+											<td>
+												<select id="specialityId0" onChange="loadCombobox(0)" name="speciality_id[0]" class="form-control">
+													@foreach($specilities as $specility)
+													<option value='{{ $specility->id }}'
+													<?php
+													if($student->id != null and $stdCls->classk->speciality->id == $specility->id)
+													{
+														echo 'selected';
+													}
+													?>
+													>
+														{{ $specility->name }}
+													</option>
+													@endforeach
+												</select>
+											</td>
+											<td>
+												<select id="classkId0" name="classk_id[0]" class="form-control">
+												@foreach($classks as $classk)
+													<option value='{{ $classk->id }}'
+													<?php
+													if($student->id != null and $stdCls->classk_id == $classk->id)
+													{
+														echo 'selected';
+													}
+													?>
+													>
+														{{ $classk->name }}
+													</option>
+													@endforeach
+												</select>
+											</td>
+										</tr>
+									@else
+										<?php $cnt = 0; ?>
+										@foreach($studentClassks as $stdCls)	
+										<tr id="choice{{ $cnt }}">
+											<td>
+												<select id="specialityId{{ $cnt }}" onChange="loadCombobox({{ $cnt }})" name="speciality_id[{{ $cnt }}]" class="form-control">
+													@foreach($specilities as $specility)
+													<option value='{{ $specility->id }}'
+													<?php
+													if($student->id != null and $stdCls->classk->speciality->id == $specility->id)
+													{
+														echo 'selected';
+													}
+													?>
+													>
+														{{ $specility->name }}
+													</option>
+													@endforeach
+												</select>
+											</td>
+											<td>
+												<select id="classkId{{ $cnt }}" name="classk_id[{{ $cnt }}]" class="form-control">
+												@foreach($classks as $classk)
+													<option value='{{ $classk->id }}'
+													<?php
+													if($student->id != null and $stdCls->classk_id == $classk->id)
+													{
+														echo 'selected';
+													}
+													?>
+													>
+														{{ $classk->name }}
+													</option>
+													@endforeach
+												</select>
+											</td>
+										</tr>
+										<?php $cnt++; ?>
+										@endforeach
+									@endif
+									</tbody>
+									<tfoot>
+									<tr>
+										<td colspan="2" align="right">
+											<button id="addMore" name="addMore" class="btn btn-default">Add more</button>
+										</td>
+									</tr>
+									</tfoot>
+								</table>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<label>Lớp</label>
-							</td>
-							<td>
-								<select id="classkId" name="classk_id" class="form-control">
-								@foreach($classks as $classk)
-									<option value='{{ $classk->id }}'
-									<?php
-									if($student->id != null and $student->classk_id == $classk->id)
-									{
-										echo 'selected';
-									}
-									?>
-									>
-										{{ $classk->name }}
-									</option>
-									@endforeach
-								</select>
-							</td>
-						</tr>
+						
 						<tr>
 							<td>
 								<button class="btn btn-default" onclick="submitForm()">Hoàn thành</button>
