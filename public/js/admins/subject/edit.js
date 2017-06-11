@@ -5,6 +5,11 @@ $(document).ready(function() {
 	table = $('#tableSpec').dataTable({
 		"ordering": false,
 	});
+
+	$('#range_relearn').val($('#selectRangeDate').val());
+	if($('#selectRangeBegin').val() != '') {
+		$('#range_begin').val($('#selectRangeBegin').val());
+	}
 });
 
 function submitForm() {

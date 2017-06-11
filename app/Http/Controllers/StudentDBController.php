@@ -24,6 +24,7 @@ class StudentDBController extends Controller
 			$students = Student::where('id_number', $request->id_number)->get();
 			if(count($students) > 0)
 			{
+				$params['begin_term'] = $students[0]->begin_term;
 				$params['studentMark'] = $this->repository->displayMarkByStudent($students[0]);
 			}
 		}

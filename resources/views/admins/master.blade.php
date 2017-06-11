@@ -24,6 +24,9 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <!-- Date picker - begin -->
+  <link href="{{ URL::asset('frameworks/datepicker/jquery-ui.css') }}" rel="stylesheet">
+  <!-- Date picker - end -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -318,6 +321,8 @@
 <!-- DataTables -->
 <script src="{{ URL::asset('frameworks/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('frameworks/datatables/dataTables.bootstrap.min.js') }}"></script>
+<!-- Date Picker -->
+<script src="{{ URL::asset('frameworks/datepicker/jquery-ui.js') }}"></script>
 @yield('javascript')
 </body>
 </html>

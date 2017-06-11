@@ -54,6 +54,8 @@ class SubjectRepository implements ISubjectRepository
 			]);
 				
 			$subject->name = $params['name'];	
+			$subject->range_relearn = $params['range_relearn'];
+			$subject->range_begin = $params['range_begin'];
 			$subject->save();
 			
 			$this->saveSpecialities($subject->id, explode(",", $params['specialities']));

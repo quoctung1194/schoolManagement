@@ -29,6 +29,8 @@ class StudentRepository implements IStudentRepository
 			$student->id_number = $params['id_number'];
 			$student->last_name = $params['last_name'];
 			$student->first_name = $params['first_name'];
+			$student->begin_term = $params['begin_term'];
+			$student->end_term = $params['end_term'];
 			$student->classk_id = $params['classk_id'][0];
 			
 			$student->save();

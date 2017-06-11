@@ -15,6 +15,7 @@ $(document).ready(function() {
 	completedDate = $('#completedDate').datepicker({
 		autoclose: true,
 		setDate: new Date(),
+		"dateFormat": "dd/mm/yy"
 	});
 });
 
@@ -70,6 +71,7 @@ function submitForm() {
 	var formData = new FormData();
 	formData.append('student_marks', $('#student_marks').val());
 	formData.append('completedDate', $('#completedDate').val());
+	formData.append('relearn', $('#relearn').is(":checked"));
 	formData.append('_token', $('#csrf-token').val());
 	
 	$.ajax({

@@ -29,8 +29,9 @@
 				<thead>
 					<tr>
 						<th width="5%">STT</th>
-						<th width="35%">Môn Học</th>
-						<th width="35%">Hoàn thành</th>
+						<th width="25%">Môn Học</th>
+						<th width="25%">Hoàn thành</th>
+						<th width="auto">Thời hạn học lại</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,11 +39,32 @@
 					$stt = 0;
 					?>
 					@foreach($studentMark as $mark)
-					<tr>
-						<td>{{ ++$stt }}</td>
-						<td>{{ $mark->subject->name }}</td>
-						<td>{{ $mark->completedDate }}</td>
-					</tr>
+						@if(!empty($mark->relearn_date))
+							<tr style="background-color: yellow; color: black">
+						@elseif (empty($mark->completedDate) and
+								!empty($mark->subject->range_begin) and
+								!empty($begin_term))
+							@php
+								$termDate = date(
+									'Y-m-d',
+									strtotime($begin_term . ' ' . $mark->range_begin)
+								);
+								$currentDate = date('Y-m-d');
+
+								if($currentDate > $termDate) {
+									echo '<tr style="background-color: red; color: white">';
+								} else {
+									echo '<tr/>';
+								}
+							@endphp
+						@else
+							<tr>
+						@endif
+							<td>{{ ++$stt }}</td>
+							<td>{{ $mark->subject->name }}</td>
+							<td>{{ $mark->completedDate }}</td>
+							<td>{{ $mark->relearn_date }}</td>
+						</tr>
 					@endforeach
 				</tbody>
 			</table>

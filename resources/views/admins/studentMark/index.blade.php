@@ -2,7 +2,6 @@
 
 @section('javascript')
 <script src="{{ URL::asset('js/admins/studentMark/index.js?v=1.3') }}"></script>
-<script src="{{ URL::asset('frameworks/datepicker/bootstrap-datepicker.js') }}" ></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js" ></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" ></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js" ></script>
@@ -14,7 +13,6 @@
 	<h1>Thêm kết quả</h1>
 </section>
 
-<link href="{{ URL::asset('frameworks/datepicker/datepicker3.css') }}" rel="stylesheet" />
 <link href="{{ URL::asset('frameworks/datatables/buttons.dataTables.min.css') }}" rel="stylesheet" />
 
 <!-- Hidden field -->
@@ -80,6 +78,9 @@
 			<div class="form-group">
 				<input type="text" class="form-control" name="completedDate" data-date-format="dd/mm/yyyy"
 					id="completedDate" placeholder="Ngày hoàn thành môn">
+                <label style="margin-top: 10px">
+                    <input type="checkbox" value="1" name="relearn" id="relearn" /> Học lại
+                </label>
 			</div>
 		</div>
       </div>

@@ -4,6 +4,10 @@
 <script src="{{ URL::asset('js/admins/student/edit.js?v=4') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$(".datepicker").datepicker({
+			"dateFormat": "yy-mm-dd" 
+		});
+		
 		$("#addMore").click(function () {
 			var ar = new Array();
 			$('tr[id^="choice"]').each(
@@ -22,7 +26,6 @@
 		    clone.children().eq(0).find('select').attr('name', 'speciality_id[' + index + ']');
 		    clone.children().eq(1).find('select').attr('id', 'classkId' + index);
 		    clone.children().eq(1).find('select').attr('name', 'classk_id[' + index + ']');
-		    
 		});
 	});
 </script>
@@ -79,6 +82,26 @@
 							</td>
 						</tr>
 						<tr>
+							<td>
+								<label>Ngày nhập học</label>
+							</td>
+							<td>
+								<input type="text" class="form-control datepicker"
+									name="begin_term" value="{{ $student->begin_term }}" />
+								<label name='validate' value='' style="color: red"></label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Ngày kết thúc</label>
+							</td>
+							<td>
+								<input type="text" class="form-control datepicker"
+									name="end_term" value="{{ $student->end_term }}" />
+								<label name='validate' value='' style="color: red"></label>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="2">
 								<table class="table table-bordered">
 									<thead>
@@ -89,6 +112,7 @@
 											<th>
 												<label>Lớp</label>
 											</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -162,6 +186,15 @@
 													</option>
 													@endforeach
 												</select>
+											</td>
+											<td>
+												<button type="button" onclick="deleteRow(this)" class="btn btn-danger btn-md">Delete</button>
+												<script>
+													function deleteRow(ref)
+													{
+														$(ref).closest("tr").remove();
+													}	
+												</script>
 											</td>
 										</tr>
 										<?php $cnt++; ?>

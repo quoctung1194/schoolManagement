@@ -11,6 +11,8 @@
 </section>
 
 <input type="hidden" id="current_route" value="{{ URL::route('ASU-003') }}" />
+<input type="hidden" id="selectRangeDate" value="{{ $subject->range_relearn }}" />
+<input type="hidden" id="selectRangeBegin" value="{{ $subject->range_begin }}" />
 
 <!-- Main content -->
 <section class="content">
@@ -27,7 +29,7 @@
 			<input type="hidden" name='specialities' id='specialities' value='' />
 			
 			<div class="box-body">
-				<table class="table table-bordered" style="width: 60%;">
+				<table class="table table-bordered" style="width: 100%;">
 					<tbody>
 						<tr>
 							<td width="15%">
@@ -36,6 +38,32 @@
 							<td>
 								<input type="text" class="form-control" name="name" value="{{ $subject->name }}">
 								<label name='validate' value='name_error' style="color: red"></label>
+							</td>
+						</tr>
+						<tr>
+							<td width="15%">
+								<label>Khoảng thời gian yêu cầu học lại</label>
+							</td>
+							<td>
+								<select name="range_relearn" id="range_relearn" class="form-control">
+									<option value="+3 months">3 tháng</option>
+									<option value="+6 months">6 tháng</option>
+									<option value="+1 year">1 năm</option>
+								</select>
+								<label name='validate' style="color: red"></label>
+							</td>
+						</tr>
+						<tr>
+							<td width="15%">
+								<label>Thời hạn yêu cầu hoàn thành môn (Sau khi nhập học)</label>
+							</td>
+							<td>
+								<select name="range_begin" id="range_begin" class="form-control">
+									<option>Không yêu cầu</option>
+									<option value="+1 weeks">1 tuần</option>
+									<option value="+2 weeks">2 tuần</option>
+								</select>
+								<label name='validate' style="color: red"></label>
 							</td>
 						</tr>
 						<tr>
