@@ -89,7 +89,7 @@ class StudentMarkController extends Controller
 		$objWriter->save('php://output');
 	}
 	
-	public function pdf($student_marks)
+	public function pdf($student_marks, Request $request)
 	{
 		require_once app_path('Frameworks/html2pdf/vendor/autoload.php');
 		
@@ -156,24 +156,24 @@ class StudentMarkController extends Controller
 	        	<tr>
 	                <td valign='top' style=\"width: 70%; height: 50px ;border-right: 1px; \">
 						<div class='text'>
-						<u><i>Nội dung đào tạo:</i></u>
+						<u><i>Nội dung đào tạo:</i></u> " . $request->content . "
 						</div>
 					</td>
 					<td valign='top' style=\"width: 30%;\">
 						<div class='text'>
-						<u><i>Ngày:</i></u>
+						<u><i>Ngày:</i></u> "  . $request->date .  "
 						</div>
 					</td>
 	            </tr>
 				<tr>
 	                <td valign='top' style=\"width: 70%; height: 50px; border-top: 1px; border-right: 1px; \">
 						<div class='text'>
-						<u><i>Giáo viên:</i></u>
+						<u><i>Giáo viên:</i></u> "  . $request->teacher .  "
 						</div>
 					</td>
 					<td valign='top' style=\"width: 30%; border-top: 1px;\">
 						<div class='text'>
-						<u><i>Địa điểm:</i></u>
+						<u><i>Địa điểm:</i></u> " . $request->location . "
 						</div>
 					</td>
 	            </tr>

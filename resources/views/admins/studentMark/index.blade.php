@@ -54,7 +54,7 @@
 			
 			<button type="button" class="btn btn-primary" onclick="displayPopup();">Hoàn thành</button>
 			<a href="{{ route('ASM-003') }}" class="btn btn-primary">Xuất Excel</a>
-			<button type="button" class="btn btn-primary" onclick="exportPDF();">Xuất PDF</button>
+			<button type="button" class="btn btn-primary" onclick="displayPopupPdf();">Xuất PDF</button>
 		</div>
 		<!-- /.box-body -->
 	</div>
@@ -86,6 +86,46 @@
       </div>
       <div class="modal-footer">
       	<button type="button" class="btn btn-primary" onclick="submitForm();">Xác nhận</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="PdfPopup" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Xuất Pdf</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <form id="pdfForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="content" name="content"
+                        placeholder="Nội dung đào tạo">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="date" name="date"
+                        placeholder="Ngày">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="teacher" name="teacher"
+                        placeholder="Giáo viên">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="location" name="location"
+                        placeholder="Địa điểm">
+                </div>
+            <form/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="exportPDF();">Xác nhận</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

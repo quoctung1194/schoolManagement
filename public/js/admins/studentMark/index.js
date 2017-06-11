@@ -28,7 +28,17 @@ function displayPopup()
 	$('#popup_displayDate').modal('show');
 }
 
-function exportPDF() {
+function displayPopupPdf()
+{
+	if(isSubmited){
+		return;
+	}
+
+	$('#PdfPopup').modal('show');
+}
+
+function exportPDF()
+{
 	var checkboxs = $(table.fnGetNodes()).find('input:checked');
 	if (checkboxs.length == 0)
 	{
@@ -39,8 +49,10 @@ function exportPDF() {
 	isSubmited = true;
 	
 	//Convert các giá trị checkbox được check vào hidden field
-	convertCheckboxs();	
-	window.open($("#ASM-004").val() + "/" + $('#student_marks').val(), "_blank");
+	convertCheckboxs();
+	params = '?' + $('#pdfForm').serialize();
+
+	window.open($("#ASM-004").val() + "/" + $('#student_marks').val() + params, "_blank");
 }
 
 function submitForm() {
