@@ -26,6 +26,7 @@ class StudentDBController extends Controller
 			{
 				$params['begin_term'] = $students[0]->begin_term;
 				$params['studentMark'] = $this->repository->displayMarkByStudent($students[0]);
+				$params['student'] = $students[0];
 			}
 		}
 

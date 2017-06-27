@@ -5,6 +5,8 @@ use Repository\StudentMark\IStudentMarkRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Student;
+use App\Speciality;
+use App\Teacher;
 
 class StudentMarkController extends Controller
 {
@@ -16,9 +18,17 @@ class StudentMarkController extends Controller
 	
 	public function index()
 	{
-		$unCompletedSubjects = $this->repository->getUncompletedSubjects();
-				
+		$unCompletedSubjects = $this->repository->getUncompletedSubjects();		
 		$params['unCompletedSubjects'] = $unCompletedSubjects;
+
+		// get Speciality
+		$specialities = Speciality::all();
+		$params['specialities'] = $specialities;
+
+		// get Teacher
+		$teachers = Teacher::all();
+		$params['teachers'] = $teachers;
+
 		return $this->view('index', $params);
 	}
 	
@@ -31,7 +41,7 @@ class StudentMarkController extends Controller
 		]);
 	}
 	
-	public function report()
+	public function report(Request $request)
 	{
 		include app_path('Frameworks/PHPExcel/PHPExcel.php');
 		include app_path('Frameworks/PHPExcel/PHPExcel/IOFactory.php');
@@ -47,7 +57,7 @@ class StudentMarkController extends Controller
 		->setCategory("quoctung1194");
 		$objPHPExcel->getActiveSheet()->setTitle('quoctung1194');
 		
-		$result = $this->repository->getRequirementSubjects();
+		$result = $this->repository->getRequirementSubjects($request->spe);
 		//Tạo header
 		$objPHPExcel->setActiveSheetIndex(0)
 		->setCellValue('A1', 'MSSV')

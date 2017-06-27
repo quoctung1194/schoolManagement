@@ -40,7 +40,7 @@ class StudentMarkRepository implements IStudentMarkRepository
 		return $unCompletedSubjects;
 	}
 	
-	public function getRequirementSubjects()
+	public function getRequirementSubjects($spe = null)
 	{
 		//Mảng chứa toàn bộ môn của sinh viên
 		$requirementSubjects = array();
@@ -49,6 +49,12 @@ class StudentMarkRepository implements IStudentMarkRepository
 		$students = Student::all();
 		foreach ($students as $student)
 		{
+			if(!empty($spe)) {
+				if($student->classk->speciality->id == $spe) {
+					continue;
+				}
+			}
+			
 			//Lấy tất cả các môn học bắt buộc của sinh viên
 			$requirementSubjects = $student->classk->speciality->subjectSpecialities;
 			

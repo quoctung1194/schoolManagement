@@ -1,7 +1,7 @@
 @extends('admins.master')
 
 @section('javascript')
-<script src="{{ URL::asset('js/admins/studentMark/index.js?v=1.3') }}"></script>
+<script src="{{ URL::asset('js/admins/studentMark/index.js?v=1.4') }}"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js" ></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" ></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js" ></script>
@@ -53,7 +53,7 @@
 			</table>
 			
 			<button type="button" class="btn btn-primary" onclick="displayPopup();">Hoàn thành</button>
-			<a href="{{ route('ASM-003') }}" class="btn btn-primary">Xuất Excel</a>
+			<button type="button" class="btn btn-primary" onclick="displayExcelPopup();">Xuất Excel</button>
 			<button type="button" class="btn btn-primary" onclick="displayPopupPdf();">Xuất PDF</button>
 		</div>
 		<!-- /.box-body -->
@@ -114,8 +114,12 @@
                         placeholder="Ngày">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="teacher" name="teacher"
-                        placeholder="Giáo viên">
+                  <select placeholder="Giáo viên" id="teacher" name="teacher" class="form-group" style="width: 100%; height: 34px; margin-bottom: 0px">
+                    <option></option>
+                    @foreach($teachers as $teacher)
+                      <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="location" name="location"
@@ -132,4 +136,45 @@
 
   </div>
 </div>
+
+<div id="excelPopup" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Xuất Excel</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <select id="excelSpecility" class="form-group" style="width: 100%">
+              <option></option>
+              @foreach($specialities as $item)
+                <option value="{{ $item->id }}"> {{ $item->name }} </option>
+              @endforeach
+            </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="exportExcel()">Xác nhận</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 @endsection
+
+<script>
+  function exportExcel()
+  {
+    var url = "{{ route('ASM-003') }}";
+    var spe = $('#excelSpecility').val();
+    if(spe != "") {
+      url += "?spe=" + spe;
+    }
+    window.open(url);
+    return false;
+  }
+</script>

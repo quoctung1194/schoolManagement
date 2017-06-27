@@ -25,6 +25,8 @@
 				MSSV: <input type="text" name="id_number" value="{{ $studentId }}" style="margin-bottom:10px; margin-left: 5px" />
 				<button type="submit">Tìm</button>
 			</form>
+			<h3>Họ tên: {{ $student->first_name . ' ' . $student->last_name }}</h3>
+
 			<table id="marks_table" class="table table-bordered table-hover">
 				<thead>
 					<tr>

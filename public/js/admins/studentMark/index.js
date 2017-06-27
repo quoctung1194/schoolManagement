@@ -30,11 +30,12 @@ function displayPopup()
 
 function displayPopupPdf()
 {
-	if(isSubmited){
-		return;
-	}
-
 	$('#PdfPopup').modal('show');
+}
+
+function displayExcelPopup()
+{
+	$('#excelPopup').modal('show');
 }
 
 function exportPDF()
