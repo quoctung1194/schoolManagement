@@ -63,16 +63,19 @@ class StudentMarkController extends Controller
 		->setCellValue('A1', 'MSSV')
 		->setCellValue('B1', 'Họ Tên')
 		->setCellValue('C1', 'Môn Học')
-		->setCellValue('D1', 'Hoàn thành');
+		->setCellValue('D1', 'Hoàn thành')
+		->setCellValue('E1', 'Thời hạn học lại');
 		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
 		$objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-		$objPHPExcel->getActiveSheet()->getStyle("A1:D1")->getFont()->setBold(true);
+		$objPHPExcel->getActiveSheet()->getStyle("A1:E1")->getFont()->setBold(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
 		$objPHPExcel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
 		$objPHPExcel->getActiveSheet()->getStyle('C')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
 		$objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
+		$objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		
 		//Gán dữ liệu
 		for($i = 0; $i < count($result); $i++)
@@ -91,6 +94,7 @@ class StudentMarkController extends Controller
 			}
 			
 			$objPHPExcel->setActiveSheetIndex(0)->setCellValueByColumnAndRow(3, $i + 2, $final);
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4, $i + 2, $result[$i]->relearn_date);
 		}
 		
 		$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

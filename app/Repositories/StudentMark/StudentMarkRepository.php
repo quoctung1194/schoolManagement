@@ -73,6 +73,7 @@ class StudentMarkRepository implements IStudentMarkRepository
 						if ($mark->subject_id == $requirementSubject->subject->id)
 						{
 							$requirementSubject->completedDate = $mark->completed_date;
+							$requirementSubject->relearn_date = $mark->relearn_date;
 							break;
 						}
 					}

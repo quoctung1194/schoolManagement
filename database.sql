@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `schoolmanagement` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `schoolmanagement`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: schoolmanagement
@@ -57,7 +55,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +64,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2017_02_26_051941_create_specialities_table',1),(5,'2017_02_26_081216_create_classes_table',2),(6,'2017_02_26_052157_create_students_table',3),(7,'2017_03_02_071655_create_subjects_table',4),(8,'2017_03_02_071908_create_subject_specialities_table',4),(9,'2017_03_07_023441_student_marks',5),(10,'2017_05_12_084005_create_student_classks_table',6);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2017_02_26_051941_create_specialities_table',1),(5,'2017_02_26_081216_create_classes_table',2),(6,'2017_02_26_052157_create_students_table',3),(7,'2017_03_02_071655_create_subjects_table',4),(8,'2017_03_02_071908_create_subject_specialities_table',4),(9,'2017_03_07_023441_student_marks',5),(10,'2017_05_12_084005_create_student_classks_table',6),(12,'2017_06_27_165942_create_teachers',7);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,6 +268,33 @@ INSERT INTO `subjects` VALUES (1,'Môn ABC DEF','+1 year','+1 weeks','2017-03-02
 UNLOCK TABLES;
 
 --
+-- Table structure for table `teachers`
+--
+
+DROP TABLE IF EXISTS `teachers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `teachers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teachers`
+--
+
+LOCK TABLES `teachers` WRITE;
+/*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
+INSERT INTO `teachers` VALUES (1,'Giáo Viên A',NULL,NULL,NULL),(2,'Giáo Viên B',NULL,NULL,NULL),(3,'Giáo Viên C',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -311,4 +336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-11 11:14:16
+-- Dump completed on 2017-07-03 21:59:20
